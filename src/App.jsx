@@ -67,7 +67,7 @@ export default function App() {
 
   const displayDate = useMemo(
     () =>
-      targetDate.toLocaleDateString('en-US', {
+      targetDate.toLocaleDateString('es-MX', {
         month: 'long',
         day: 'numeric',
         year: 'numeric'
@@ -78,7 +78,7 @@ export default function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (!email.includes('@')) {
-      setMessage('Enter a valid email to unlock access.')
+      setMessage('Escribe un correo válido para desbloquear acceso.')
       return
     }
 
@@ -86,39 +86,37 @@ export default function App() {
     const updated = [...new Set([...existing, email.toLowerCase().trim()])]
     localStorage.setItem('onyx_waitlist', JSON.stringify(updated))
 
-    setMessage('Access secured. You are now on the ONYXCLO waitlist.')
+    setMessage('Acceso asegurado. Ya estás en la lista ONYXCLO.')
     setEmail('')
   }
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-white text-zinc-900">
+    <div className="relative min-h-screen overflow-x-hidden bg-zinc-950 text-zinc-100">
       <div className="pointer-events-none fixed inset-0 opacity-40 [background-size:3px_3px] bg-grain" />
 
-      <header className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-zinc-200/70 bg-white/70 px-5 py-4 backdrop-blur-xl md:px-10">
+      <header className="fixed top-0 z-50 flex w-full items-center justify-between border-b border-zinc-700/70 bg-zinc-950/90 px-5 py-4 backdrop-blur-xl md:px-10">
         <div className="text-xl font-black tracking-[0.35em]">ONYXCLO</div>
-        <div className="rounded-full border border-zinc-300 px-4 py-1 text-xs font-semibold tracking-[0.18em]">
+        <div className="rounded-full border border-zinc-500 px-4 py-1 text-xs font-semibold tracking-[0.18em]">
           DROP 001
         </div>
       </header>
 
-      <main className="pt-20">
+      <main className="pt-24">
         <section className="relative flex min-h-screen items-center justify-center px-6 py-24">
-          <motion.div
-            animate={{ y: [0, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute right-8 top-24 hidden h-56 w-56 rounded-full bg-zinc-100 blur-3xl md:block"
-          />
           <div className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 text-center">
+            <p className="rounded-full border border-zinc-700 bg-zinc-900 px-4 py-2 text-xs font-bold tracking-[0.3em]">
+              ENCABEZADO + TEMPORIZADOR ACTIVOS
+            </p>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="text-5xl font-black uppercase leading-none tracking-[0.08em] md:text-8xl"
             >
-              LAUNCHING SOON
+              LANZAMOS PRONTO
             </motion.h1>
-            <p className="max-w-xl text-sm tracking-[0.2em] text-zinc-600 md:text-base">
-              ACCESS OPENS IN · {displayDate} · LUXURY TECHWEAR FOR THE NEXT ERA
+            <p className="max-w-xl text-sm tracking-[0.2em] text-zinc-300 md:text-base">
+              EL ACCESO ABRE EL {displayDate.toUpperCase()} · TECHWEAR DE LUJO
             </p>
 
             <div className="grid w-full max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
@@ -126,10 +124,10 @@ export default function App() {
                 <motion.div
                   key={label}
                   whileHover={{ y: -4, scale: 1.02 }}
-                  className="rounded-3xl border border-zinc-200 bg-white/80 p-6 shadow-soft backdrop-blur"
+                  className="rounded-3xl border border-zinc-700 bg-zinc-900 p-6 shadow-soft backdrop-blur"
                 >
                   <div className="text-4xl font-black md:text-6xl">{String(value).padStart(2, '0')}</div>
-                  <div className="mt-2 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-500">
+                  <div className="mt-2 text-xs font-semibold uppercase tracking-[0.25em] text-zinc-400">
                     {label}
                   </div>
                 </motion.div>
@@ -141,8 +139,8 @@ export default function App() {
         </section>
 
         <FadeSection className="mx-auto grid w-full max-w-6xl gap-8 px-6 pb-24 md:grid-cols-2">
-          <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-8 shadow-premium">
-            <p className="text-xs font-bold tracking-[0.3em] text-zinc-500">LIMITED EARLY ACCESS</p>
+          <div className="rounded-3xl border border-zinc-700 bg-zinc-900 p-8 shadow-premium">
+            <p className="text-xs font-bold tracking-[0.3em] text-zinc-400">LIMITED EARLY ACCESS</p>
             <h2 className="mt-4 text-3xl font-black uppercase md:text-4xl">JOIN THE WAITLIST</h2>
             <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
               <input
@@ -151,27 +149,22 @@ export default function App() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@email.com"
-                className="rounded-2xl border border-zinc-300 bg-white px-5 py-4 text-sm outline-none transition focus:border-zinc-900"
+                className="rounded-2xl border border-zinc-600 bg-zinc-950 px-5 py-4 text-sm text-zinc-100 outline-none transition focus:border-white"
               />
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="rounded-2xl bg-zinc-900 px-5 py-4 text-xs font-bold uppercase tracking-[0.24em] text-white"
+                className="rounded-2xl bg-white px-5 py-4 text-xs font-bold uppercase tracking-[0.24em] text-zinc-900"
               >
                 Request Early Access
               </motion.button>
             </form>
-            <motion.p
-              key={message}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-4 text-sm text-zinc-600"
-            >
+            <motion.p key={message} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-4 text-sm text-zinc-300">
               {message}
             </motion.p>
           </div>
 
-          <div className="flex items-center justify-center rounded-3xl border border-zinc-200 bg-white p-8 shadow-soft">
+          <div className="flex items-center justify-center rounded-3xl border border-zinc-700 bg-zinc-900 p-8 shadow-soft">
             <div className="text-center">
               <p className="text-xs font-bold tracking-[0.3em] text-zinc-500">SIGNATURE IDENTITY</p>
               <div className="mt-6 text-[clamp(6rem,20vw,14rem)] font-black leading-none tracking-[0.1em]">ONYX</div>
@@ -187,11 +180,11 @@ export default function App() {
                 <motion.article
                   key={item.title}
                   whileHover={{ y: -8 }}
-                  className="min-w-[280px] snap-start rounded-3xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-100 p-6 shadow-soft md:min-w-[360px]"
+                  className="min-w-[280px] snap-start rounded-3xl border border-zinc-700 bg-gradient-to-b from-zinc-900 to-zinc-800 p-6 shadow-soft md:min-w-[360px]"
                 >
-                  <div className="mb-20 h-48 rounded-2xl border border-zinc-300 bg-zinc-200/60" />
+                  <div className="mb-20 h-48 rounded-2xl border border-zinc-600 bg-zinc-700/60" />
                   <h4 className="text-lg font-black">{item.title}</h4>
-                  <p className="mt-2 text-xs tracking-[0.2em] text-zinc-500">{item.subtitle}</p>
+                  <p className="mt-2 text-xs tracking-[0.2em] text-zinc-400">{item.subtitle}</p>
                 </motion.article>
               ))}
             </div>
@@ -201,7 +194,7 @@ export default function App() {
         <FadeSection className="mx-auto max-w-6xl px-6 pb-28">
           <div className="grid gap-4 md:grid-cols-2">
             {editorial.map((line) => (
-              <article key={line} className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-soft">
+              <article key={line} className="rounded-3xl border border-zinc-700 bg-zinc-900 p-8 shadow-soft">
                 <p className="text-2xl font-black uppercase leading-tight md:text-3xl">{line}</p>
               </article>
             ))}
@@ -209,13 +202,13 @@ export default function App() {
         </FadeSection>
       </main>
 
-      <footer className="border-t border-zinc-200 px-6 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-500 md:flex-row">
+      <footer className="border-t border-zinc-700 px-6 py-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.18em] text-zinc-400 md:flex-row">
           <span>© 2026 ONYXCLO</span>
           <div className="flex gap-6">
-            <a href="#" className="transition hover:text-zinc-900">Instagram</a>
-            <a href="#" className="transition hover:text-zinc-900">TikTok</a>
-            <a href="#" className="transition hover:text-zinc-900">X</a>
+            <a href="#" className="transition hover:text-zinc-100">Instagram</a>
+            <a href="#" className="transition hover:text-zinc-100">TikTok</a>
+            <a href="#" className="transition hover:text-zinc-100">X</a>
           </div>
         </div>
       </footer>
