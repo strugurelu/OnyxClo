@@ -9,10 +9,47 @@
     <meta property="og:description" content="Cuenta atrás del drop, catálogo inicial y acceso anticipado." />
     <meta property="og:type" content="website" />
     <title>ONYXCLO — DROP 001</title>
+    <style>
+      .tech-index {
+        margin: 0;
+        padding: 2rem 1rem;
+        font-family: Inter, Arial, sans-serif;
+        background: #0a0a0a;
+        color: #f5f5f5;
+      }
+      .tech-index h1 {
+        margin: 0 0 0.5rem;
+        font-size: 1.2rem;
+      }
+      .tech-index p {
+        margin: 0 0 1rem;
+        color: #c7c7c7;
+      }
+      .tech-index ul {
+        margin: 0;
+        padding-left: 1.2rem;
+      }
+      .tech-index li {
+        margin-bottom: 0.35rem;
+      }
+      #root:not(:empty) + .tech-index {
+        border-top: 1px solid #262626;
+      }
+    </style>
   </head>
   <body>
     <noscript>Necesitas activar JavaScript para usar esta web.</noscript>
     <div id="root"></div>
+    <section class="tech-index" aria-label="Índice de lenguajes usados">
+      <h1>Índice de lenguajes usados en ONYXCLO</h1>
+      <p>Este proyecto usa estos lenguajes en el frontend:</p>
+      <ul>
+        <li><strong>HTML5</strong> — estructura base del sitio y de esta página index.</li>
+        <li><strong>CSS3</strong> — estilos visuales y responsive design.</li>
+        <li><strong>JavaScript</strong> — lógica de UI, estado, validaciones y temporizador.</li>
+        <li><strong>JSX</strong> — sintaxis usada en los componentes React.</li>
+      </ul>
+    </section>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
