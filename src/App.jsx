@@ -233,15 +233,6 @@ export default function App() {
           ))}
         </section>
 
-        <section className="faq" aria-label="Lenguajes usados en el sitio">
-          <h2>Lenguajes del sitio</h2>
-          {siteLanguages.map((language) => (
-            <article key={language.name}>
-              <h3>{language.name}</h3>
-              <p>{language.role}</p>
-            </article>
-          ))}
-        </section>
       </main>
     </div>
   )
