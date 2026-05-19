@@ -28,6 +28,21 @@ const collectionStats = [
   { label: 'Nuevos diseños', value: '12' }
 ]
 
+const siteLanguages = [
+  {
+    name: 'JavaScript',
+    role: 'Lógica de la interfaz, validaciones y cuenta atrás en tiempo real.'
+  },
+  {
+    name: 'HTML5',
+    role: 'Estructura semántica para navegación, catálogo, formulario y FAQ.'
+  },
+  {
+    name: 'CSS3',
+    role: 'Estilos visuales, layout responsive y look premium de ONYXCLO.'
+  }
+]
+
 const faqs = [
   ['¿Hacen envíos internacionales?', 'Sí, enviamos a más de 40 países con tracking.'],
   ['¿Cuándo cobra la preventa?', 'Solo se cobra al confirmar tu pedido en el checkout.'],
@@ -214,6 +229,16 @@ export default function App() {
             <article key={question}>
               <h3>{question}</h3>
               <p>{answer}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="faq" aria-label="Lenguajes usados en el sitio">
+          <h2>Lenguajes del sitio</h2>
+          {siteLanguages.map((language) => (
+            <article key={language.name}>
+              <h3>{language.name}</h3>
+              <p>{language.role}</p>
             </article>
           ))}
         </section>
