@@ -22,6 +22,12 @@ const products = [
   }
 ]
 
+const collectionStats = [
+  { label: 'Unidades del drop', value: '350' },
+  { label: 'Ciudades con envíos', value: '40+' },
+  { label: 'Nuevos diseños', value: '12' }
+]
+
 const faqs = [
   ['¿Hacen envíos internacionales?', 'Sí, enviamos a más de 40 países con tracking.'],
   ['¿Cuándo cobra la preventa?', 'Solo se cobra al confirmar tu pedido en el checkout.'],
@@ -146,6 +152,7 @@ export default function App() {
           <p className="eyebrow">DROP 001 · LIMITED RELEASE</p>
           <h1>EL NUEVO UNIFORME DE CALLE.</h1>
           <p className="lead">Diseños minimalistas, cortes premium y unidades ultra limitadas.</p>
+          <p className="flash">✨ Actualización real: agregamos vista previa del drop y métricas de la colección.</p>
           <p>El acceso abre el <strong>{displayDate}</strong>.</p>
 
           <section className="countdown" aria-label="Cuenta atrás del drop">
@@ -156,6 +163,15 @@ export default function App() {
               </article>
             ))}
           </section>
+        </section>
+
+        <section className="stats" aria-label="Resumen de la colección">
+          {collectionStats.map((item) => (
+            <article key={item.label}>
+              <strong>{item.value}</strong>
+              <span>{item.label}</span>
+            </article>
+          ))}
         </section>
 
         <section className="split" id="catalogo">

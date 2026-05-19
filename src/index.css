@@ -172,3 +172,34 @@ button {
   margin: 0;
   color: #e1e1e1;
 }
+
+.flash {
+  margin-top: 0.6rem;
+  color: #f3d9a5;
+  font-weight: 600;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.8rem;
+  margin: 0 0 1.6rem;
+}
+
+.stats article {
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #111, #0a0a0a);
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.stats strong {
+  font-size: 1.35rem;
+}
+
+.stats span {
+  color: #bdbdbd;
+  font-size: 0.85rem;
+}
