@@ -28,6 +28,21 @@ const collectionStats = [
   { label: 'Nuevos diseños', value: '12' }
 ]
 
+const siteLanguages = [
+  {
+    name: 'JavaScript',
+    role: 'Lógica de la interfaz, validaciones y cuenta atrás en tiempo real.'
+  },
+  {
+    name: 'HTML5',
+    role: 'Estructura semántica para navegación, catálogo, formulario y FAQ.'
+  },
+  {
+    name: 'CSS3',
+    role: 'Estilos visuales, layout responsive y look premium de ONYXCLO.'
+  }
+]
+
 const faqs = [
   ['¿Hacen envíos internacionales?', 'Sí, enviamos a más de 40 países con tracking.'],
   ['¿Cuándo cobra la preventa?', 'Solo se cobra al confirmar tu pedido en el checkout.'],
