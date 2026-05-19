@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 
 const dropDate = new Date(new Date().getFullYear(), 6, 30, 23, 59, 59)
+const WAITLIST_KEY = 'onyx_waitlist'
+const BASE_WAITLIST = 1294
 
 const products = [
   {
@@ -25,6 +27,29 @@ const faqs = [
   ['¿Cuándo cobra la preventa?', 'Solo se cobra al confirmar tu pedido en el checkout.'],
   ['¿Cómo elijo talla?', 'Te enviaremos la guía de tallas detallada por correo antes del drop.']
 ]
+
+function safeGetWaitlist() {
+  try {
+    if (typeof window === 'undefined' || !window.localStorage) return []
+    const raw = window.localStorage.getItem(WAITLIST_KEY)
+    if (!raw) return []
+
+    const parsed = JSON.parse(raw)
+    return Array.isArray(parsed) ? parsed.filter((item) => typeof item === 'string') : []
+  } catch {
+    return []
+  }
+}
+
+function safeSetWaitlist(waitlist) {
+  try {
+    if (typeof window === 'undefined' || !window.localStorage) return false
+    window.localStorage.setItem(WAITLIST_KEY, JSON.stringify(waitlist))
+    return true
+  } catch {
+    return false
+  }
+}
 
 function useCountdown(endDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
@@ -57,7 +82,7 @@ function useCountdown(endDate) {
 export default function App() {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-  const [waitlistCount, setWaitlistCount] = useState(1294)
+  const [waitlistCount, setWaitlistCount] = useState(BASE_WAITLIST)
   const time = useCountdown(dropDate)
 
   const displayDate = useMemo(
@@ -72,8 +97,8 @@ export default function App() {
   )
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem('onyx_waitlist') || '[]')
-    setWaitlistCount(1294 + saved.length)
+    const saved = safeGetWaitlist()
+    setWaitlistCount(BASE_WAITLIST + saved.length)
   }, [])
 
   const handleSubmit = (event) => {
@@ -85,7 +110,7 @@ export default function App() {
     }
 
     const normalized = email.toLowerCase().trim()
-    const existing = JSON.parse(localStorage.getItem('onyx_waitlist') || '[]')
+    const existing = safeGetWaitlist()
 
     if (existing.includes(normalized)) {
       setMessage('Ese correo ya está en la lista VIP. Revisa tu bandeja de entrada.')
@@ -93,8 +118,14 @@ export default function App() {
     }
 
     const updated = [...existing, normalized]
-    localStorage.setItem('onyx_waitlist', JSON.stringify(updated))
-    setWaitlistCount(1294 + updated.length)
+    const stored = safeSetWaitlist(updated)
+
+    if (!stored) {
+      setMessage('No pudimos guardar tu acceso en este navegador. Inténtalo de nuevo.')
+      return
+    }
+
+    setWaitlistCount(BASE_WAITLIST + updated.length)
     setMessage('Acceso asegurado. Ya estás en la lista ONYXCLO.')
     setEmail('')
   }
